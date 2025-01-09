@@ -90,8 +90,41 @@
     color: #c02567;
     font-size: 5em;
     font-weight: 800;
+    display: inline-block; 
+    white-space: wrap;
   }
   
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .word {
+    display: inline-block; 
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+  }
+  .word:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .word:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .word:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+  .word:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  .word:nth-child(5) {
+    animation-delay: 1s;
+  }
   .li-banner .li-banner-desc {
     color: #545c5c;
     font-size: 2em;
@@ -119,8 +152,16 @@
   }
   
   .li-banner-bottom .li-banner-bottom-main-title {
-    font-weight: 600;
-    font-size: 3.25em;
+    font-weight: 600; /* Your specified font-weight */
+    font-size: 3.25em; /* Your specified font-size */
+    opacity: 0; /* Make it invisible initially */
+    transform: translateX(-100px); /* Start off-screen to the left */
+    transition: transform 0.8s ease, opacity 0.8s ease; /* Smooth transition for animation */
+  }
+  
+  .li-banner-bottom .li-banner-bottom-main-title.visible {
+    opacity: 1; /* Make it visible when the class is added */
+    transform: translateX(0); /* Move it to its original position */
   }
   
   .li-banner-bottom .li-banner-bottom-title {
@@ -155,7 +196,16 @@
     font-weight: 800;
     font-size: 4em;
     color: #000;
+    opacity: 0; /* Initially hidden */
+    transform: translateX(-50px); /* Start off-screen to the left */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
   }
+  
+  .li-business-area .li-business-area-title.visible {
+    opacity: 1; /* Make it visible */
+    transform: translateX(0); /* Slide into its original position */
+  }
+  
   
   .li-business-area .li-business-area-desc {
     font-weight: 500;
@@ -163,49 +213,78 @@
     color: #b8b6b8;
   }
   
-  .li-business-area .images-wrap {
-    position: relative;
-  }
-  
-  .li-business-area .images-wrap::after {
-    content: "";
-    background: url(../images/images-shape-2.png) no-repeat;
-    position: absolute;
-    right: 0;
-    top: -11.375em;
-    width: 292px;
-    height: 292px;
-    z-index: -3;
-  }
-  
-  .li-business-area .images-wrap .lp-main {
-    z-index: -2;
-    position: relative;
-  }
-  
-  .li-business-area .images-wrap .lp-graph {
-    position: relative;
-    margin-left: -8.313em;
-    margin-top: -9.063em;
-    z-index: -1;
-  }
-  
-  .li-business-area .images-wrap .lp-speedometer {
-    position: absolute;
-    top: -8.875em;
-    right: 0;
-  }
-  .li-portfolio-area {
-    margin-block: 10.5em 5.188em;
-  }
+  /* Initial state for images */
+.li-business-area .images-wrap img {
+  opacity: 0; /* Initially invisible */
+  transform: translateY(-50px); /* Start from above */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
 
-  .li-portfolio-area .li-portfolio-area-title {
-    font-weight: 700;
-    font-size: 8em;
-    color: #c02567;
-    margin-bottom: 1em;
-  }
+/* When the images become visible (when added with 'visible' class) */
+.li-business-area .images-wrap.visible img {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide down to normal position */
+}
 
+/* Optional: for smooth background transition of images-wrap */
+.li-business-area .images-wrap {
+  position: relative;
+}
+
+/* Optional: for the background shape */
+.li-business-area .images-wrap::after {
+  content: "";
+  background: url(../images/images-shape-2.png) no-repeat;
+  position: absolute;
+  right: 0;
+  top: -11.375em;
+  width: 292px;
+  height: 292px;
+  z-index: -3;
+}
+
+/* Specific styling for images */
+.li-business-area .images-wrap .lp-main {
+  z-index: -2;
+  position: relative;
+}
+
+.li-business-area .images-wrap .lp-graph {
+  position: relative;
+  margin-left: -8.313em;
+  margin-top: -9.063em;
+  z-index: -1;
+}
+
+.li-business-area .images-wrap .lp-speedometer {
+  position: absolute;
+  top: -8.875em;
+  right: 0;
+}
+
+.li-portfolio-area {
+  margin-block: 10.5em 5.188em;
+}
+
+
+.li-portfolio-area .li-portfolio-area-title {
+  font-weight: 700;
+  font-size: 8em;
+  text-fill-color: transparent;
+  text-stroke: 4px #c02567;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 4px #c02567;
+  -moz-text-fill-color: transparent;
+  font-family: 'monospace';
+  transition: all 0.5s ease;
+  opacity: 0; 
+  transform: translateY(-100px);
+}
+.li-portfolio-area .li-portfolio-area-title.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1s ease, opacity 1s ease;
+}
   .li-portfolio-area .li-portfolio-area-desc {
     font-size: 1.5em;
     color: #545c5c;
@@ -495,108 +574,101 @@
   }
   .li-services-main-title .clr-primary{
     color: #c02567;
+    transition: all 0.2s;
+  }
+  .li-services-main-title .clr-primary:hover{
+    color: #d48cb4;
   }
   .li-services-area .li-services-main-title.my-big {
-    margin-block: 18.75rem 5.75rem;
+    /* margin-block: 18.75rem 5.75rem; */
   }
-  
+  #Service-Image-Animation {
+    animation: rotateImage 5s linear infinite;
+    transition: transform 0.3s ease-in-out; 
+  }
+  @keyframes rotateImage {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  #Service-Image-Animation:hover {
+    animation-play-state: paused;
+  }
+  .li-services-area {
+    overflow-x: hidden;
+  }
   .li-services-area .li-service-card {
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     background-color: #fff;
     padding: 2em 1.25em 1.438em;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-  }
-  
-  .li-services-area {
+    transition: all 1s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
     position: relative;
-    z-index: 1;
+    background: #fff;  
+    overflow: hidden;
   }
-  
-  .li-services-area::before {
-    opacity: 0.6;
-    filter: blur(60px);
-    background-color: #d48cb38e;
-    width: 100%;
-    height: 70%;
-    z-index: -1;
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    -webkit-filter: blur(60px);
-  }
-  
-  .li-services-area .li-service-card .li-btn {
-    border-radius: 35px;
-    -webkit-border-radius: 35px;
-    -moz-border-radius: 35px;
-    -ms-border-radius: 35px;
-    -o-border-radius: 35px;
-  }
-  
   .li-services-area .li-service-card:hover {
-    background-color: #000;
+    background: linear-gradient(45deg, #545c5c 0%, #d48cb369 100%); 
+    background-size: 200% 200%;
+    transform: scale(1.05);
+    animation: bgShift 0.6s ease-out forwards;
   }
-  
-  .li-services-area .bottom-btn {
-    background-color: #000;
-    color: #fff;
+  @keyframes bgShift {
+    0% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
   }
-  
-  .li-services-area .bottom-btn:hover {
-    border-color: #fff;
-  }
-  
-  .li-services-area .li-service-card:hover .li-btn img {
-    filter: brightness(0) invert(1);
-    -webkit-filter: brightness(0) invert(1);
-  }
-  
-  .li-services-area .li-service-card:hover .li-btn {
-    background-color: #c02567;
-    color: #fff;
-    border-color: #c02567;
-  }
-  
-  .li-services-area .li-service-card:hover h4,
-  .li-services-area .li-service-card:hover p {
-    color: #fff;
-  }
-  
-  .li-services-area .li-service-card h4 {
-    color: #000;
-    font-size: 2em;
-    font-weight: 700;
-  }
-  
-  .li-services-area .li-service-card p {
-    font-size: 1em;
-    color: #000;
-  }
-  
-  .li-services-area .li-service-card .li-service-icon {
-    border-radius: 50%;
-    width: 74px;
-    background-color: #c02567;
-    height: 74px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+.li-services-area .li-service-card:hover .li-btn {
+  background-color: #c02567;
+  color: #fff;
+  border-color: #c02567;
+}
+.li-services-area .li-service-card .li-service-icon {
+  border-radius: 50%;
+  width: 74px;
+  background-color: #c02567;
+  height: 74px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;  
+}
+.li-services-area .li-service-card:hover .li-service-icon {
+  transform: rotate(360deg);  
+}
+.li-services-area .li-service-card:hover h4,
+.li-services-area .li-service-card:hover p {
+  color: #fff;
+}
+.li-services-area .li-service-card h4 {
+  color: #000;
+  font-size: 2em;
+  font-weight: 700;
+  transition: color 0.4s ease; 
+}
+.li-services-area .li-service-card p {
+  font-size: 1em;
+  color: #000;
+  transition: color 0.4s ease;
+}
+.li-services-area .li-service-card h4, .li-services-area .li-service-card p {
+  transition: color 0.4s ease;
+}
+
   
   .li-policy-wrapper h1,
   .li-terms-wrapper h1 {
