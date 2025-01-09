@@ -1,3 +1,121 @@
+// Background Animnation 
+window.onload = function() {
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 50, 
+        "density": {
+          "enable": true,
+          "value_area": 552.4044389642416
+        }
+      },
+      "color": {
+        "value": ["#65c025", "#ff0000", "#0000ff", "#ff00ff"]
+      },
+      "shape": {
+        "type": "polygon",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 6
+        },
+        "image": {
+          "src": "img/github.svg",
+          "width": 100,
+          "height": 100
+        }
+      },
+      "opacity": {
+        "value": 0.09620443442314919,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 10, 
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": false,
+        "distance": 150,
+        "color": "#1d6e26",
+        "opacity": 0.10422147062507829,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "bounce",
+        "bounce": false,
+        "attract": {
+          "enable": true,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": false,
+          "mode": "bubble"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 400,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "bubble": {
+          "distance": 400,
+          "size": 20.30199213297805,
+          "duration": 2,
+          "opacity": 0.6740261388148712,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 113.69115594467708,
+          "duration": 0.4
+        },
+        "push": {
+          "particles_nb": 4
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true
+  });
+};
+
+
+// Background Animation End
+
+
 //   MAIN HEADING ANIMATION
   const bannerTitle = document.querySelector(".li-banner-title");
 const text = "Where ideas evolve into excellence.";
