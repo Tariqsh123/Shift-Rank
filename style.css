@@ -62,6 +62,12 @@
     padding-block: 2.063em;
   }
    */
+   .navbar{
+    padding: 0;
+   }
+   .navbar .btn{
+    margin-bottom: 10px;
+   }
   .li-main-nav .nav-item a {
     color: #545c5c;
   }
@@ -77,7 +83,7 @@
     max-width: 46.5em;
   }
   .navbar-brand img{
-    height: 100px;
+    height: 70px;
     width: auto;
   }
   .li-banner .li-banner-title {
